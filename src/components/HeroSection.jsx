@@ -31,6 +31,7 @@ Let the good times roll – your stage awaits!
         <video
           autoPlay
           loop
+          playsInline
           muted
           className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 mx-2 my-4"
         >
@@ -40,6 +41,7 @@ Let the good times roll – your stage awaits!
         <video
           autoPlay
           loop
+          playsInline
           muted
           className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 mx-2 my-4"
         >
