@@ -1,6 +1,10 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { features } from "../constants";
 
 const FeatureSection = () => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
   return (
     <div className="relative mt-20 border-b border-neutral-800 min-h-[800px]">
       <div className="text-center">
@@ -18,18 +22,47 @@ const FeatureSection = () => {
       {/* Feature Cards Grid */}
       <div className="grid gap-8 mt-10 lg:mt-20 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6">
         {features.map((feature, index) => (
-          <div key={index} className="bg-neutral-900 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-            <img 
-              src={feature.image} 
-              alt={feature.text} 
+          <motion.div
+            key={index}
+            className="bg-neutral-900 p-6 rounded-2xl shadow-lg cursor-pointer relative"
+            initial={{ scale: 1, y: 0 }}
+            animate={{
+              scale: expandedIndex === index ? 1.05 : 1,
+              y: expandedIndex === index ? -10 : 0,
+            }}
+            transition={{ duration: 0.3 }}
+            onClick={() =>
+              setExpandedIndex(expandedIndex === index ? null : index)
+            }
+          >
+            <img
+              src={feature.image}
+              alt={feature.text}
               className="w-full h-48 object-cover rounded-lg"
             />
             <div className="flex items-center justify-center w-12 h-12 bg-orange-700 text-white rounded-full mt-4">
               {feature.icon}
             </div>
-            <h5 className="text-xl font-semibold text-white mt-4">{feature.text}</h5>
-            <p className="text-md text-neutral-400 mt-2">{feature.description}</p>
-          </div>
+            <h5 className="text-xl font-semibold text-white mt-4">
+              {feature.text}
+            </h5>
+            <p className="text-md text-neutral-400 mt-2">
+              {feature.description}
+            </p>
+
+            {/* Reveal Button on Expansion */}
+            {expandedIndex === index && (
+              <motion.a
+                href="https://api.whatsapp.com/send/?phone=2349167417758&text&type=phone_number&app_absent=0&wame_ctl=1"
+                className="mt-6 inline-block bg-orange-600 text-white px-4 py-2 rounded-lg text-center w-full hover:bg-orange-700 transition"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                Learn More
+              </motion.a>
+            )}
+          </motion.div>
         ))}
       </div>
     </div>
