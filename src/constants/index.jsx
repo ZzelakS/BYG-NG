@@ -12,11 +12,19 @@ import user4 from "../assets/profile-pictures/user4.jpg";
 import user5 from "../assets/profile-pictures/user5.jpg";
 import user6 from "../assets/profile-pictures/user6.jpg";
 
+import image1 from "../assets/team bonding.jpeg";
+import image2 from "../assets/childrens.jpeg";
+import image3 from "../assets/karaoke.jpeg";
+import image4 from "../assets/sip.jpeg";
+import image5 from "../assets/candle.jpeg";
+import image6 from "../assets/meals.jpeg";
+import gallery2 from "../assets/gallery2.jpg";
+
 export const navItems = [
-  { label: "Services", href: "#" },
   // { label: "Workflow", href: "#" },
-  { label: "Our Packages", href: "#" },
-  { label: "Testimonials", href: "#" },
+  { label: "Our Packages", href: "/packages" },
+  { label: "Contact Us", href: "/contact" },
+  // { label: "Testimonials", href: "#" },
 ];
 
 export const testimonials = [
@@ -62,36 +70,42 @@ export const features = [
   {
     icon: <UsersRound />,
     text: "Team Bonding",
+    image: image1,
     description:
       "The perfect mix for building connections and creating memories!",
   },
   {
     icon: <Gift />,
     text: "Children's Party",
+    image: image2,
     description:
       "Make your child’s special day unforgettable at BYG! 🎉🎤.",
   },
   {
     icon: <Music />,
     text: "Karaoke",
+    image: image3,
     description:
       "Whether you’re a pro or just here for fun, our karaoke nights are all about good vibes, and unforgettable performances!",
   },
   {
     icon: <Palette />,
     text: "Sip and Paint",
+    image: image4,
     description:
       "Enjoy a night of artistic expression paired with delightful cocktails and good vibes. No experience needed—just bring your imagination!.",
   },
   {
     icon: <PlugZap />,
     text: "Candle Making",
+    image: image5,
     description:
       "Blend scents, design your masterpiece, and light up your creativity!.",
   },
   {
     icon: <UtensilsCrossed />,
     text: "The tastiest meals",
+    image: image6,
     description:
       "From sizzling grills to gourmet delights, our sumptuous meals are crafted to satisfy your cravings and elevate your dining experience. Bon appétit!",
   },
@@ -123,7 +137,8 @@ export const checklistItems = [
 export const pricingOptions = [
   {
     title: "Team Bondings",
-    price: "₦37k",
+    price: "₦40k",
+    image: image1,
     features: [
       "Engaging and Interactive Games",
       "Sumptuous Meals",
@@ -134,6 +149,7 @@ export const pricingOptions = [
   {
     title: "Kids' Parties",
     price: "₦50k",
+    image: image2,
     features: [
       "Custom Themed Birthday Party",
       "Finger Foods",
@@ -144,6 +160,7 @@ export const pricingOptions = [
   {
     title: "Photo & Video Shoots",
     price: "TBD",
+    image: gallery2,
     features: [
       "Cozy Spaces",
       "Steady Power",

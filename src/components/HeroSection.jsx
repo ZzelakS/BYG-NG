@@ -18,12 +18,12 @@ Let the good times roll – your stage awaits!
       </p>
       <div className="flex justify-center my-10">
         <a
-          href="#"
+          href="/packages"
           className="bg-gradient-to-r from-orange-500 to-orange-800 py-3 px-4 mx-3 rounded-md"
         >
           Book Now
         </a>
-        <a href="#" className="py-3 px-4 mx-3 rounded-md border">
+        <a href="https://api.whatsapp.com/send/?phone=2349167417758&text&type=phone_number&app_absent=0&wame_ctl=1" className="py-3 px-4 mx-3 rounded-md border">
           Contact Us
         </a>
       </div>
