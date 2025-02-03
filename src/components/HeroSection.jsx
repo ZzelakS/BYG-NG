@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import video1 from "../assets/video1.mp4";
 import video2 from "../assets/video2.mp4";
 
@@ -12,18 +13,24 @@ const HeroSection = () => {
         </span>
       </h1>
       <p className="mt-10 text-lg text-center text-neutral-500 max-w-4xl">
-      Unleash your inner superstar at BYG! 🎤✨ Indulge in crafted cocktails, sizzling grills, and unforgettable karaoke nights. Whether you’re here to steal the spotlight or soak in the vibes, every moment is a hit.
-
-Let the good times roll – your stage awaits!
+        Unleash your inner superstar at BYG! 🎤✨ Indulge in crafted cocktails,
+        sizzling grills, and unforgettable karaoke nights. Whether you’re here
+        to steal the spotlight or soak in the vibes, every moment is a hit.
+        <br />
+        <br />
+        Let the good times roll – your stage awaits!
       </p>
       <div className="flex justify-center my-10">
-        <a
-          href="/packages"
+        <Link
+          to="/packages" // Use the Link component to handle internal navigation
           className="bg-gradient-to-r from-orange-500 to-orange-800 py-3 px-4 mx-3 rounded-md"
         >
           Book Now
-        </a>
-        <a href="https://api.whatsapp.com/send/?phone=2349167417758&text&type=phone_number&app_absent=0&wame_ctl=1" className="py-3 px-4 mx-3 rounded-md border">
+        </Link>
+        <a
+          href="https://api.whatsapp.com/send/?phone=2349167417758&text&type=phone_number&app_absent=0&wame_ctl=1"
+          className="py-3 px-4 mx-3 rounded-md border"
+        >
           Contact Us
         </a>
       </div>
