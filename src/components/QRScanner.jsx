@@ -22,20 +22,17 @@ const QRScanner = () => {
             setStatus("Checking database...");
             setColor("black");
 
-            console.log("Decoded QR text:", decodedText);
-
-            // Extract unique_id from URL path after /invite/, ignore anything after next slash or ? or #
-            const match = decodedText.match(/\/invite\/([^\/\?\#]+)/);
-            const unique_id = match ? match[1].trim() : decodedText.trim();
-
-            console.log("Extracted unique_id:", unique_id);
-
             try {
+              // Extract unique_id from full URL or use raw code
+              const match = decodedText.match(/\/invite\/([^/?#]+)/);
+              const unique_id = match ? match[1] : decodedText;
+
               const inviteeRef = doc(db, "party_invitees", unique_id);
               const docSnap = await getDoc(inviteeRef);
 
               if (docSnap.exists()) {
                 const data = docSnap.data();
+
                 if (data.checked_in) {
                   setStatus(`Already checked in: ${data.name}`);
                   setColor("orange");
@@ -44,22 +41,33 @@ const QRScanner = () => {
                   setStatus(`Welcome, ${data.name}! ✅`);
                   setColor("green");
                 }
+
+                // Show tooltip, then redirect
+                setTimeout(() => {
+                  window.location.href = decodedText;
+                }, 2500);
               } else {
                 setStatus("Invalid QR code ❌");
                 setColor("red");
+
+                // Restart scanner after short delay
+                setTimeout(() => {
+                  setStatus("");
+                  setColor("black");
+                  startScanner();
+                }, 3000);
               }
             } catch (error) {
               console.error("Firestore error:", error);
-              setStatus("Error accessing database");
+              setStatus("Error accessing database ❌");
               setColor("red");
-            }
 
-            // Restart scanning after 3 seconds
-            setTimeout(() => {
-              setStatus("");
-              setColor("black");
-              startScanner();
-            }, 3000);
+              setTimeout(() => {
+                setStatus("");
+                setColor("black");
+                startScanner();
+              }, 3000);
+            }
           }
         )
         .catch((err) => {
@@ -82,9 +90,15 @@ const QRScanner = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
+      {/* ✅ Always visible logo for Safari compatibility */}
+      <img
+        src="/logo.png"
+        alt="Party Logo"
+        style={{ maxWidth: "100px", marginBottom: "10px" }}
+      />
       <h2>Gate QR Scanner</h2>
       <div id="qr-reader" style={{ width: 300, margin: "auto" }}></div>
-      <p style={{ marginTop: "20px", color }}>{status}</p>
+      <p style={{ marginTop: "20px", color, fontWeight: "bold" }}>{status}</p>
     </div>
   );
 };
