@@ -23,7 +23,11 @@ const QRScanner = () => {
             setColor("black");
 
             try {
-              const inviteeRef = doc(db, "party_invitees", decodedText);
+              // Extract unique_id from full URL or use raw code
+              const match = decodedText.match(/\/invite\/([a-zA-Z0-9_-]+)/);
+              const unique_id = match ? match[1] : decodedText;
+
+              const inviteeRef = doc(db, "party_invitees", unique_id);
               const docSnap = await getDoc(inviteeRef);
 
               if (docSnap.exists()) {
