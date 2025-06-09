@@ -18,29 +18,19 @@ const QRScanner = () => {
           { facingMode: "environment" },
           { fps: 10, qrbox: 250 },
           async (decodedText) => {
-            scanner.stop(); // stop scanning on successful read
-
-            // Show message immediately
-            setStatus("Processing QR code...");
+            scanner.stop(); // Stop scanner after successful read
+            setStatus("Checking database...");
             setColor("black");
 
-            // If decodedText looks like a URL
-            if (decodedText.startsWith("http")) {
-              setStatus(`Redirecting to ${decodedText} ...`);
-              setColor("blue");
+            console.log("Decoded QR text:", decodedText);
 
-              // Wait 2 seconds so user sees tooltip, then redirect
-              setTimeout(() => {
-                window.location.href = decodedText;
-              }, 2000);
-              return; // exit early, no Firestore check needed
-            }
+            // Extract unique_id from URL path after /invite/, ignore anything after next slash or ? or #
+            const match = decodedText.match(/\/invite\/([^\/\?\#]+)/);
+            const unique_id = match ? match[1].trim() : decodedText.trim();
 
-            // Not a URL — check Firestore as invite ID
+            console.log("Extracted unique_id:", unique_id);
+
             try {
-              const match = decodedText.match(/\/invite\/([a-zA-Z0-9_-]+)/);
-              const unique_id = match ? match[1] : decodedText;
-
               const inviteeRef = doc(db, "party_invitees", unique_id);
               const docSnap = await getDoc(inviteeRef);
 
@@ -64,7 +54,7 @@ const QRScanner = () => {
               setColor("red");
             }
 
-            // Restart scanning after 3 seconds so user sees message
+            // Restart scanning after 3 seconds
             setTimeout(() => {
               setStatus("");
               setColor("black");
@@ -94,7 +84,7 @@ const QRScanner = () => {
     <div style={{ textAlign: "center" }}>
       <h2>Gate QR Scanner</h2>
       <div id="qr-reader" style={{ width: 300, margin: "auto" }}></div>
-      <p style={{ marginTop: 20, color, fontWeight: "bold" }}>{status}</p>
+      <p style={{ marginTop: "20px", color }}>{status}</p>
     </div>
   );
 };
