@@ -33,7 +33,7 @@ const InvitePage = () => {
     };
 
     fetchAndCheckIn();
-  }, [uniqueId]);
+  }, [unique_id]);
 
   if (loading) return <p className="p-4 text-center">Loading...</p>;
   if (!invitee) return <p className="p-4 text-center text-red-600">Invalid QR code or invitee not found.</p>;
