@@ -37,7 +37,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/food-menu" element={<FlipbookViewer flipbookUrl={foodMenuUrl} />} />
         <Route path="/qrscanner" element={<QRScanner />} />
-        <Route path="/invite/:uniqueId" element={<InvitePage />} /> {/* ✅ Route for personalized invite */}
+        <Route path="/invite/:unique_Id" element={<InvitePage />} /> {/* ✅ Route for personalized invite */}
         <Route path="*" element={<h1 className="text-center mt-10">Page Not Found</h1>} />
       </Routes>
     </Router>
