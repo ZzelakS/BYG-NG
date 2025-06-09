@@ -25,6 +25,7 @@ export const navItems = [
   { label: "Our Packages", href: "/packages" },
   { label: "Contact Us", href: "/contact" },
   { label: "Menu", href: "/food-menu" },
+  { label: "QR Scanner", href: "/qrscanner" },
   // { label: "Testimonials", href: "#" },
 ];
 
