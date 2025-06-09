@@ -10,7 +10,8 @@ import Contact from "./pages/Contact";
 import Packages from "./pages/Packages";
 import HeroCarousel from "./components/HeroCarousel";
 import FlipbookViewer from "./components/MenuViewer";
-import QRScanner from "./components/QRScanner"; // ✅ Added this line
+import QRScanner from "./components/QRScanner";
+import InvitePage from "./components/InvitePage"; // ✅ Import this
 
 const Home = () => (
   <div className="max-w-7xl mx-auto pt-20 px-6">
@@ -35,7 +36,8 @@ const App = () => {
         <Route path="/packages" element={<Packages />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/food-menu" element={<FlipbookViewer flipbookUrl={foodMenuUrl} />} />
-        <Route path="/qrscanner" element={<QRScanner />} /> {/* ✅ Gate Scanner route */}
+        <Route path="/qrscanner" element={<QRScanner />} />
+        <Route path="/invite/:uniqueId" element={<InvitePage />} /> {/* ✅ Route for personalized invite */}
         <Route path="*" element={<h1 className="text-center mt-10">Page Not Found</h1>} />
       </Routes>
     </Router>
