@@ -19,11 +19,17 @@ const QRScanner = () => {
           { fps: 10, qrbox: 250 },
           async (decodedText) => {
             scanner.stop(); // Stop scanner after successful read
-            setStatus("Checking database...");
+            setStatus("Processing QR code...");
             setColor("black");
 
+            // If it's a URL, redirect immediately
+            if (decodedText.startsWith("http")) {
+              window.location.href = decodedText;
+              return;
+            }
+
             try {
-              // Extract unique_id from full URL or use raw code
+              // Extract unique_id from a URL or use raw text
               const match = decodedText.match(/\/invite\/([a-zA-Z0-9_-]+)/);
               const unique_id = match ? match[1] : decodedText;
 
