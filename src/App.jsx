@@ -11,7 +11,7 @@ import Packages from "./pages/Packages";
 import HeroCarousel from "./components/HeroCarousel";
 import FlipbookViewer from "./components/MenuViewer";
 import QRScanner from "./components/QRScanner";
-import InvitePage from "./components/InvitePage"; // ✅ Import this
+import InvitePage from "./pages/InvitePage"; // ✅ Import this
 
 const Home = () => (
   <div className="max-w-7xl mx-auto pt-20 px-6">
