@@ -18,18 +18,26 @@ const QRScanner = () => {
           { facingMode: "environment" },
           { fps: 10, qrbox: 250 },
           async (decodedText) => {
-            scanner.stop(); // Stop scanner after successful read
+            scanner.stop(); // stop scanning on successful read
+
+            // Show message immediately
             setStatus("Processing QR code...");
             setColor("black");
 
-            // If it's a URL, redirect immediately
+            // If decodedText looks like a URL
             if (decodedText.startsWith("http")) {
-              window.location.href = decodedText;
-              return;
+              setStatus(`Redirecting to ${decodedText} ...`);
+              setColor("blue");
+
+              // Wait 2 seconds so user sees tooltip, then redirect
+              setTimeout(() => {
+                window.location.href = decodedText;
+              }, 2000);
+              return; // exit early, no Firestore check needed
             }
 
+            // Not a URL — check Firestore as invite ID
             try {
-              // Extract unique_id from a URL or use raw text
               const match = decodedText.match(/\/invite\/([a-zA-Z0-9_-]+)/);
               const unique_id = match ? match[1] : decodedText;
 
@@ -56,7 +64,7 @@ const QRScanner = () => {
               setColor("red");
             }
 
-            // Restart scanning after 3 seconds
+            // Restart scanning after 3 seconds so user sees message
             setTimeout(() => {
               setStatus("");
               setColor("black");
@@ -86,7 +94,7 @@ const QRScanner = () => {
     <div style={{ textAlign: "center" }}>
       <h2>Gate QR Scanner</h2>
       <div id="qr-reader" style={{ width: 300, margin: "auto" }}></div>
-      <p style={{ marginTop: "20px", color }}>{status}</p>
+      <p style={{ marginTop: 20, color, fontWeight: "bold" }}>{status}</p>
     </div>
   );
 };
