@@ -4,14 +4,14 @@ import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const InvitePage = () => {
-  const { uniqueId } = useParams();  // <-- match param name here
+  const { unique_id } = useParams();  // <-- match param name here
   const [invitee, setInvitee] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAndCheckIn = async () => {
       try {
-        const ref = doc(db, "party_invitees", uniqueId);
+        const ref = doc(db, "party_invitees", unique_id);
         const snap = await getDoc(ref);
 
         if (snap.exists()) {
